@@ -1,7 +1,7 @@
+import 'dart:math';
+
 import 'package:firebase_why1/presentation/write/write_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 class WriteScreen extends StatefulWidget {
@@ -12,7 +12,12 @@ class WriteScreen extends StatefulWidget {
 }
 
 class _WriteScreenState extends State<WriteScreen> {
-  final inputTextController = inputTextController;
+  final inputTextController = TextEditingController();
+  @override
+  void dispose() {
+    inputTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +29,16 @@ class _WriteScreenState extends State<WriteScreen> {
       body: Column(
         children: [
           TextField(
+            controller: inputTextController,
             decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10)
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.send),
+                onPressed: () {
+                  viewModel.write(inputTextController.text, '${Random().nextDouble()}');
+                },
               ),
-              suffixIcon: IconButton(icon: const Icon(Icons.send), onPressed: () {
-                viewModel.write(text);
-              },),
               hintText: '글을 쓰세요',
             ),
           )

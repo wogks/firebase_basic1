@@ -4,11 +4,16 @@ class Memo {
 
   Memo({required this.title, required this.body});
 
-  Memo.fromjson(Map<String, dynamic> json)
+  Memo.fromJson(Map<String, dynamic> json)
       : this(
           title: json['title']! as String,
           body: json['body']! as String,
         );
 
-  toJson() {}
+   Map<String, Object?> toJson() {
+    return {
+      'title': title,
+      'body': body,
+    };
+  }
 }
