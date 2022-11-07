@@ -56,3 +56,12 @@ class MainScreen extends StatelessWidget {
                   );
   }
 }
+
+//다른 사람도 볼 수 있는 것
+// FirebaseFirestore.instance
+//                     .collection('memos')
+//                     .withConverter<Memo>(
+//                       fromFirestore: (snapshot, _) =>
+//                           Memo.fromJson(snapshot.data()!),
+//                       toFirestore: (movie, _) => movie.toJson(),
+//                     ),
