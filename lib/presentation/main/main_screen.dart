@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
+import 'package:go_router/go_router.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -13,9 +12,20 @@ class MainScreen extends StatelessWidget {
         title: const Text('메인'),
       ),
       body: Center(
-        child: ElevatedButton(child: const Text('log out') ,onPressed: () {
-          FirebaseAuth.instance.signOut();
-        },),
+        child: Column(
+          children: [
+            ElevatedButton(
+              child: const Text('log out'),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+            ),
+            ElevatedButton(
+              child: const Text('글쓰기 페이지'),
+              onPressed: () => context.push('/write'),
+            ),
+          ],
+        ),
       ),
     );
   }
